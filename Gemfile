@@ -12,6 +12,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'devise'
-gem "omniauth-google-oauth2"
+gem 'omniauth-google-oauth2'
+gem 'google_calendar'
+gem 'google-api-client', :require => 'google/api_client'
 gem 'figaro'
 gem 'binding_of_caller'
