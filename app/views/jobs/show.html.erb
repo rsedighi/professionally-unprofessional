@@ -36,9 +36,12 @@
 </p>
 
 <p>
-  <strong>Any additional contacts?</strong>
-  <%= @job.additional_contacts %>
+  <strong>User ID:</strong>
+  <%= @job.user_id %>
+  <!-- <strong>Any additional contacts?</strong> -->
+  <%#= @job.additional_contacts %>
 </p>
 
 <%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Delete', @job, method: :delete, data: {confirm: "Are you sure?"} %> |
 <%= link_to 'Back', jobs_path %>

@@ -1,5 +1,6 @@
 <% if current_user %>
 <h1>Listing jobs</h1>
+<h5><%= "Total jobs applied: #{current_user.jobs.count}" %></h5>
 
 <table>
   <thead>
@@ -11,13 +12,15 @@
       <th>Contact</th>
       <th>Contact-phone</th>
       <th>Notes</th>
-      <th>Additional Contacts</th>
+      <th>User Id</th>
+      <!-- <th>Additional Contacts</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @jobs.each do |job| %>
+      <% if current_user.id == job.user_id %>
       <tr>
         <td><%= job.company_name %></td>
         <td><%= job.job_title %></td>
@@ -26,11 +29,11 @@
         <td><%= job.contact_name %></td>
         <td><%= job.contact_phone %></td>
         <td><%= job.notes %></td>
-        <td><%= job.additional_contacts %></td>
+        <td><%#= job.additional_contacts %></td>
         <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', job, method: :delete, data: {confirm: "Are you sure?"} %></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
