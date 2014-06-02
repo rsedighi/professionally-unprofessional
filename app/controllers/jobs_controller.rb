@@ -1,5 +1,7 @@
 class JobsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_job, only: [:show, :edit, :update, :destroy]
+
 
   # GET /jobs
   # GET /jobs.json
@@ -10,6 +12,7 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+
   end
 
   # GET /jobs/new
@@ -28,6 +31,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
+        current_user.jobs << @job
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
         format.json { render :show, status: :created, location: @job }
       else
@@ -67,8 +71,12 @@ class JobsController < ApplicationController
       @job = Job.find(params[:id])
     end
 
+    def user_id
+    @user = User.find(job.user_id)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:company_name, :job_title, :applied_date, :follow_up_date, :contact_name, :contact_phone, :notes, :additional_contacts)
+      params.require(:job).permit(:company_name, :job_title, :applied_date, :follow_up_date, :contact_name, :contact_phone, :notes, :additional_contacts, :user_id)
     end
 end
